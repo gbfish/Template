@@ -38,14 +38,22 @@ class ViewController: UIViewController {
         
 //        var templateLarge = TemplateLarge(x: 0, y: 0, width: 99, height: 0)
         
-        var templateLarge = TemplateLarge(x: 10, y: 20, width: 30, title: "my title")
-        
-        print("templateLarge = \(templateLarge)")
-        
-        print("templateLarge = \(templateLarge.size())")
-        print(" - templateLarge = \(templateLarge.size())")
+//        var templateLarge = TemplateLarge(x: 10, y: 20, width: 30, title: "my title")
+//        
+//        print("templateLarge = \(templateLarge)")
+//        
+//        print("templateLarge = \(templateLarge.size())")
+//        print(" - templateLarge = \(templateLarge.size())")
 
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let width = UIScreen.main.bounds.width
+        var templateLarge = TemplateLarge(x: 0, y: 50, width: width, title: "my title")
+        
+        templateLarge.setup(view: view)
     }
 
 

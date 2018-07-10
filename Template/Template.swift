@@ -14,7 +14,7 @@ enum Status {
     case needCalculate
 }
 
-protocol Changeable {
+protocol Template {
     var x: CGFloat { get set }
     var y: CGFloat { get set }
     var width: CGFloat { get set }
@@ -22,14 +22,19 @@ protocol Changeable {
     
     var status: Status { get set }
     
-    var items: [Changeable]? { get set }
+    var items: [Template]? { get set }
     
     mutating func calculate()
     
     mutating func setup(view: UIView) 
 }
 
-extension Changeable {
+extension Template {
+    
+    var frame: CGRect {
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
+    
     mutating func size() -> CGRect {
         if status == .needCalculate {
             calculate()

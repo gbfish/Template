@@ -8,13 +8,14 @@
 
 import UIKit
 
-struct TemplateLarge: Changeable {
+struct TemplateLarge: Template {
+    
     var x: CGFloat
     var y: CGFloat
     var width: CGFloat
     var height: CGFloat
     var status: Status
-    var items: [Changeable]?
+    var items: [Template]?
     
     var title: String
     
@@ -41,7 +42,7 @@ struct TemplateLarge: Changeable {
     mutating func calculate() {
         print(self)
         if status == .needCalculate {
-            items = [Changeable]()
+            items = [Template]()
             
             //            let item1 = TemplateLarge(x: 10.0, y: 10.0, width: 50.0, height: 0.0, status: .needCalculate, itemsArray: nil)
             
@@ -55,15 +56,50 @@ struct TemplateLarge: Changeable {
 //                }
 //            }
             
-            if let items = items {
-                for index in items.indices {
-                    var item = items[index]
-                    item.calculate()
-                }
-            }
+//            var dataArray = [TemplateComponentTextViewDataProtocol]()
+//
+//            let titleData = TemplateComponentTextViewDataText(pargraphIsEnd: false, paragraphSpacing: 50, text: title, font: UIFont.systemFont(ofSize: 20), color: UIColor.blue)
+//            dataArray.append(titleData)
+//
+//            let summaryData = TemplateComponentTextViewDataText(pargraphIsEnd: true, paragraphSpacing: 50, text: "summary summary summary", font: UIFont.systemFont(ofSize: 15), color: UIColor.yellow)
+//            dataArray.append(summaryData)
+//
+//            let lastData = TemplateComponentTextViewDataText(pargraphIsEnd: false, paragraphSpacing: 0, text: "last", font: UIFont.systemFont(ofSize: 15), color: UIColor.yellow)
+//            dataArray.append(lastData)
+//
+//            let templateComponentTextView = TemplateComponentTextView(x: 10, y: 50, width: width - 20, dataArray: dataArray, exclusionRectArray: nil)
+            
+
+            let paragraph1DataArray: [TCTextViewDataProtocol] = [
+                TCTextViewDataIcon(iconName: "sign-check-icon", iconSize: CGSize(width: 30, height: 30)),
+                TCTextViewDataText(text: "title first", font: UIFont.systemFont(ofSize: 20), color: UIColor.yellow),
+                TCTextViewDataText(text: "title second", font: UIFont.systemFont(ofSize: 15), color: UIColor.blue)]
+            
+            let paragraph1 = TCTextViewDataParagraph(isLastParagraph: false, paragraphSpacing: 0, dataArray: paragraph1DataArray)
             
             
-            height = 200.0
+            let paragraph2DataArray = [TCTextViewDataText(text: "detail first", font: UIFont.systemFont(ofSize: 25), color: UIColor.yellow), TCTextViewDataText(text: "detail second detail second detail second detail second detail second", font: UIFont.systemFont(ofSize: 10), color: UIColor.blue)]
+    
+            let paragraph2 = TCTextViewDataParagraph(isLastParagraph: true, paragraphSpacing: 0, dataArray: paragraph2DataArray)
+            
+            let dataArray = [paragraph1, paragraph2]
+            
+            let templateComponentTextView = TCTextView(x: 10, y: 50, width: width - 20, dataArray: dataArray, exclusionRectArray: [CGRect(x: 0, y: 0, width: 50, height: 50)])
+            
+            items?.append(templateComponentTextView)
+            
+//            (x: 10, y: 10, width:width - 20, height: 0, status: .needCalculate, dataArray: dataArray)
+            
+            
+//            if let items = items {
+//                for index in items.indices {
+//                    var item = items[index]
+//                    item.calculate()
+//                }
+//            }
+            
+            
+//            height = 200.0
             status = .normal
         }
         print(self)
@@ -73,10 +109,12 @@ struct TemplateLarge: Changeable {
         calculate()
         
         if let items = items {
-            for item in items {
-//                item.setup(view: view)
+            for index in items.indices {
+                var item = items[index]
+                item.setup(view: view)
             }
         }
+
     }
 
 }
