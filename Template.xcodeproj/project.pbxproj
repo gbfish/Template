@@ -66,7 +66,7 @@
 				9680B45B20F3C6B4001B67FB /* AppDelegate.swift */,
 				9680B45D20F3C6B4001B67FB /* ViewController.swift */,
 				9680B46F20F3DF75001B67FB /* Template.swift */,
-				964016F120F4F675005E242B /* TCTextView.swift */,
+				96A1022220F556F30053B4E0 /* Component */,
 				964016EF20F3F51F005E242B /* TemplateLarge.swift */,
 				9680B45F20F3C6B4001B67FB /* Main.storyboard */,
 				9680B46220F3C6B6001B67FB /* Assets.xcassets */,
@@ -74,6 +74,14 @@
 				9680B46720F3C6B6001B67FB /* Info.plist */,
 			);
 			path = Template;
+			sourceTree = "<group>";
+		};
+		96A1022220F556F30053B4E0 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				964016F120F4F675005E242B /* TCTextView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
