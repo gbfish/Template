@@ -22,7 +22,7 @@ protocol Template {
     
     var status: Status { get set }
     
-    var items: [Template]? { get set }
+//    var items: [Template]? { get set }
     
     mutating func calculate()
     

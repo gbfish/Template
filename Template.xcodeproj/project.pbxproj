@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		964016F020F3F51F005E242B /* TemplateLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964016EF20F3F51F005E242B /* TemplateLarge.swift */; };
 		964016F220F4F675005E242B /* TCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964016F120F4F675005E242B /* TCTextView.swift */; };
+		966726ED20F7EB7400AD0F67 /* TCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966726EC20F7EB7400AD0F67 /* TCView.swift */; };
 		9680B45C20F3C6B4001B67FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680B45B20F3C6B4001B67FB /* AppDelegate.swift */; };
 		9680B45E20F3C6B4001B67FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680B45D20F3C6B4001B67FB /* ViewController.swift */; };
 		9680B46120F3C6B4001B67FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9680B45F20F3C6B4001B67FB /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		964016EF20F3F51F005E242B /* TemplateLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLarge.swift; sourceTree = "<group>"; };
 		964016F120F4F675005E242B /* TCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCTextView.swift; sourceTree = "<group>"; };
+		966726EC20F7EB7400AD0F67 /* TCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCView.swift; sourceTree = "<group>"; };
 		9680B45820F3C6B4001B67FB /* Template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Template.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9680B45B20F3C6B4001B67FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9680B45D20F3C6B4001B67FB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		96A1022220F556F30053B4E0 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				966726EC20F7EB7400AD0F67 /* TCView.swift */,
 				964016F120F4F675005E242B /* TCTextView.swift */,
 			);
 			path = Component;
@@ -159,6 +162,7 @@
 				9680B47020F3DF75001B67FB /* Template.swift in Sources */,
 				964016F020F3F51F005E242B /* TemplateLarge.swift in Sources */,
 				964016F220F4F675005E242B /* TCTextView.swift in Sources */,
+				966726ED20F7EB7400AD0F67 /* TCView.swift in Sources */,
 				9680B45E20F3C6B4001B67FB /* ViewController.swift in Sources */,
 				9680B45C20F3C6B4001B67FB /* AppDelegate.swift in Sources */,
 			);

@@ -15,15 +15,14 @@ struct TCTextView: Template {
     var width: CGFloat
     var height: CGFloat
     var status: Status
-    var items: [Template]?
     
-    init(x: CGFloat, y: CGFloat, width: CGFloat, dataArray: [TCTextViewDataProtocol], exclusionRectArray: [CGRect]?) {
+    init(x: CGFloat, y: CGFloat, width: CGFloat, article: TCTextViewDataArticle, exclusionRectArray: [CGRect]?) {
         self.x = x
         self.y = y
         self.width = width
         self.height = 0
         
-        self.dataArray = dataArray
+        self.article = article
         self.exclusionRectArray = exclusionRectArray
         
         status = .needCalculate
@@ -47,7 +46,7 @@ struct TCTextView: Template {
             return textView
         } else {
             textView = UITextView(frame: frame)
-            textView!.attributedText = attributedString()
+            textView!.attributedText = article.attributedString
             textView!.backgroundColor = UIColor.red
             textView!.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             textView!.textContainer.lineFragmentPadding = 0
@@ -80,54 +79,69 @@ struct TCTextView: Template {
     
     // MARK: Data
     
-    var dataArray: [TCTextViewDataProtocol]
-    
-    private func attributedString() -> NSAttributedString {
-        let attributedString = NSMutableAttributedString()
-        dataArray.forEach { attributedString.append($0.attributedString()) }
-        return attributedString
-    }
+    var article: TCTextViewDataArticle
 }
 
 // MARK: - Data
 
 protocol TCTextViewDataProtocol {
-    func attributedString() -> NSAttributedString
+    var attributedString: NSAttributedString { get }
 }
+
+// MARK: Article
+
+struct TCTextViewDataArticle: TCTextViewDataProtocol {
+    
+    var paragraphs: [TCTextViewDataParagraph]
+    
+    init(paragraphs: [TCTextViewDataParagraph]) {
+        self.paragraphs = paragraphs
+    }
+    
+    var attributedString: NSAttributedString {
+        let attributedString = NSMutableAttributedString()
+        paragraphs.forEach { attributedString.append($0.attributedString) }
+        return attributedString
+    }
+}
+
+// MARK: Paragraph
 
 struct TCTextViewDataParagraph: TCTextViewDataProtocol {
     
-    var isLastParagraph: Bool
     var paragraphSpacing: CGFloat
-    var dataArray: [TCTextViewDataProtocol]
+    var words: [TCTextViewDataWordProtocol]
     
-    init(isLastParagraph: Bool, paragraphSpacing: CGFloat, dataArray: [TCTextViewDataProtocol]) {
-        self.isLastParagraph = isLastParagraph
+    init(paragraphSpacing: CGFloat, words: [TCTextViewDataWordProtocol]) {
         self.paragraphSpacing = paragraphSpacing
-        self.dataArray = dataArray
+        self.words = words
     }
     
-    func attributedString() -> NSAttributedString {
+    var attributedString: NSAttributedString {
         let attributedString = NSMutableAttributedString()
-        dataArray.forEach { attributedString.append($0.attributedString()) }
+        words.forEach { attributedString.append($0.attributedString) }
         
-        if isLastParagraph == false {
-            let returnAttributedString = NSAttributedString(string: "\n")
-            attributedString.insert(returnAttributedString, at: attributedString.length)
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 0
-            paragraphStyle.paragraphSpacing = paragraphSpacing
-            
-            let range = NSRange(location: 0, length: attributedString.length)
-            attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: range)
-        }
+        let returnAttributedString = NSAttributedString(string: "\n")
+        attributedString.insert(returnAttributedString, at: attributedString.length)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 0
+        paragraphStyle.paragraphSpacing = paragraphSpacing
+        
+        let range = NSRange(location: 0, length: attributedString.length)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: range)
         
         return attributedString
     }
 }
+
+// MARK: Word
+
+protocol TCTextViewDataWordProtocol: TCTextViewDataProtocol {
     
-struct TCTextViewDataText: TCTextViewDataProtocol {
+}
+
+struct TCTextViewDataWordText: TCTextViewDataWordProtocol {
     
     let text: String
     let font: UIFont
@@ -139,7 +153,7 @@ struct TCTextViewDataText: TCTextViewDataProtocol {
         self.color = color
     }
 
-    func attributedString() -> NSAttributedString {
+    var attributedString: NSAttributedString {
         let attributedString = NSMutableAttributedString(string: text)
         let range = NSRange(location: 0, length: attributedString.length)
         
@@ -150,7 +164,7 @@ struct TCTextViewDataText: TCTextViewDataProtocol {
     }
 }
 
-struct TCTextViewDataIcon: TCTextViewDataProtocol {
+struct TCTextViewDataWordIcon: TCTextViewDataWordProtocol {
     
     let iconName: String
     let iconSize: CGSize
@@ -160,7 +174,7 @@ struct TCTextViewDataIcon: TCTextViewDataProtocol {
         self.iconSize = iconSize
     }
     
-    func attributedString() -> NSAttributedString {
+    var attributedString: NSAttributedString {
         let textAttachment = NSTextAttachment()
         textAttachment.image = UIImage(named: iconName)
         textAttachment.bounds = CGRect(x: 0, y: 0, width: iconSize.width, height: iconSize.height)

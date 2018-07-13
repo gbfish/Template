@@ -69,24 +69,33 @@ struct TemplateLarge: Template {
 //
 //            let templateComponentTextView = TemplateComponentTextView(x: 10, y: 50, width: width - 20, dataArray: dataArray, exclusionRectArray: nil)
             
+            
+            var backgroundView = TCView(x: 5, y: 5, width: width - 10, height: 0, color: UIColor.black)
+            items?.append(backgroundView)
 
-            let paragraph1DataArray: [TCTextViewDataProtocol] = [
-                TCTextViewDataIcon(iconName: "sign-check-icon", iconSize: CGSize(width: 30, height: 30)),
-                TCTextViewDataText(text: "title first", font: UIFont.systemFont(ofSize: 20), color: UIColor.yellow),
-                TCTextViewDataText(text: "title second", font: UIFont.systemFont(ofSize: 15), color: UIColor.blue)]
+
+            let words1: [TCTextViewDataWordProtocol] = [
+                TCTextViewDataWordIcon(iconName: "sign-check-icon", iconSize: CGSize(width: 30, height: 30)),
+                TCTextViewDataWordText(text: "title first", font: UIFont.systemFont(ofSize: 20), color: UIColor.yellow),
+                TCTextViewDataWordText(text: "title second", font: UIFont.systemFont(ofSize: 15), color: UIColor.blue)]
+            let paragraph1 = TCTextViewDataParagraph(paragraphSpacing: 10, words: words1)
             
-            let paragraph1 = TCTextViewDataParagraph(isLastParagraph: false, paragraphSpacing: 0, dataArray: paragraph1DataArray)
+            let words2 = [TCTextViewDataWordText(text: "detail first", font: UIFont.systemFont(ofSize: 25), color: UIColor.yellow), TCTextViewDataWordText(text: "detail second detail second detail second detail second detail second", font: UIFont.systemFont(ofSize: 10), color: UIColor.blue)]
+            let paragraph2 = TCTextViewDataParagraph(paragraphSpacing: 0, words: words2)
+            
+            let paragraphs = [paragraph1, paragraph2]
+            let article = TCTextViewDataArticle(paragraphs: paragraphs)
+            
+            var templateComponentTextView = TCTextView(x: 10, y: 50, width: width - 20, article: article, exclusionRectArray: [CGRect(x: 0, y: 0, width: 50, height: 50)])
             
             
-            let paragraph2DataArray = [TCTextViewDataText(text: "detail first", font: UIFont.systemFont(ofSize: 25), color: UIColor.yellow), TCTextViewDataText(text: "detail second detail second detail second detail second detail second", font: UIFont.systemFont(ofSize: 10), color: UIColor.blue)]
-    
-            let paragraph2 = TCTextViewDataParagraph(isLastParagraph: true, paragraphSpacing: 0, dataArray: paragraph2DataArray)
-            
-            let dataArray = [paragraph1, paragraph2]
-            
-            let templateComponentTextView = TCTextView(x: 10, y: 50, width: width - 20, dataArray: dataArray, exclusionRectArray: [CGRect(x: 0, y: 0, width: 50, height: 50)])
+            templateComponentTextView.calculate()
             
             items?.append(templateComponentTextView)
+            
+            var item0 = items![0]
+            item0.height = templateComponentTextView.y + templateComponentTextView.height - item0.y
+            items![0] = item0
             
 //            (x: 10, y: 10, width:width - 20, height: 0, status: .needCalculate, dataArray: dataArray)
             
