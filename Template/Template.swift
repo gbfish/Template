@@ -12,9 +12,16 @@ import UIKit
 enum Status {
     case normal
     case needCalculate
+    
+//    case initialization
+//    case setupLayout
+//    case setupView
+//    case setupAction
 }
 
 protocol Template {
+//    associatedtype UIType
+    
     var x: CGFloat { get set }
     var y: CGFloat { get set }
     var width: CGFloat { get set }
@@ -26,10 +33,22 @@ protocol Template {
     
     mutating func calculate()
     
-    mutating func setup(view: UIView) 
+    mutating func setup(view: UIView) //-> UIType
 }
 
 extension Template {
+    
+//    init(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) {
+//        self.x = x
+//        self.y = y
+//        self.width = width
+//        self.height = height
+//        status = .needCalculate
+//    }
+    
+    mutating func calculate() {
+        status = .normal
+    }
     
     var frame: CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
@@ -90,3 +109,63 @@ extension Template {
 //    }
 }
 
+
+class NewTemplate {
+    
+    enum Status {
+        case initialization
+        case setupLayout
+        case setupView
+        case setupAction
+    }
+    
+    var status: Status = .initialization
+    
+    func setupLayout() {
+        print("This is super setupLayout 1.")
+        defer {
+            print("This is defer from super setupLayout.")
+        }
+        
+        print("This is super setupLayout. 2")
+    }
+    
+    func setupView() {
+        
+    }
+    
+    func setupAction() {
+        
+    }
+    
+    func checkStatus() {
+        switch status {
+        case .initialization:
+            setupLayout()
+            status = .setupLayout
+            
+        case .setupLayout:
+            setupView()
+            status = .setupView
+            
+        case .setupView:
+            setupAction()
+            status = .setupAction
+            
+        case .setupAction:
+            break
+        }
+        
+    }
+    
+}
+
+class NewTemplateLarge: NewTemplate {
+    
+    override func setupLayout() {
+        super.setupLayout()
+        
+        print("subclass setupLayout")
+    }
+    
+}

@@ -1,14 +1,16 @@
 //
-//  TemplateComponentTextView.swift
+//  TComponentTextView.swift
 //  Template
 //
-//  Created by David Yu on 2018/7/10.
+//  Created by David Yu on 2018/7/13.
 //  Copyright © 2018年 David Yu. All rights reserved.
 //
 
 import UIKit
 
-struct TCTextView: Template {
+struct TComponentTextView: TComponent {
+    
+    typealias ComponentType = UITextView
     
     var x: CGFloat
     var y: CGFloat
@@ -16,29 +18,44 @@ struct TCTextView: Template {
     var height: CGFloat
     var status: Status
     
-    init(x: CGFloat, y: CGFloat, width: CGFloat, article: TCTextViewDataArticle, exclusionRectArray: [CGRect]?) {
+    init(x: CGFloat, y: CGFloat, width: CGFloat, article: TComponentTextViewDataArticle, exclusionRectArray: [CGRect]?) {
         self.x = x
         self.y = y
         self.width = width
         self.height = 0
+        status = .needCalculate
         
         self.article = article
         self.exclusionRectArray = exclusionRectArray
-        
-        status = .needCalculate
     }
     
     mutating func calculate() {
-        _ = myTextView()
+        let textView = component
+        
+        let newSize = textView.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        height = newSize.height
+        
         status = .normal
     }
     
-    mutating func setup(view: UIView) {
-        view.addSubview(myTextView())
+    var component: UITextView {
+        let textView = UITextView(frame: frame)
+        textView.attributedText = article.attributedString
+        textView.backgroundColor = UIColor.red
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        textView.textContainer.lineFragmentPadding = 0
+        textView.isEditable = false
+        textView.isSelectable = false
+        textView.isSelectable = false
+        textView.textAlignment = NSTextAlignment.left
+        
+        textView.textContainer.exclusionPaths = exclusionPaths()
+        
+        return textView
     }
     
     // MARK: UITextView
-    
+    /*
     private var textView: UITextView?
     
     mutating func myTextView() -> UITextView {
@@ -63,7 +80,7 @@ struct TCTextView: Template {
             
             return textView!
         }
-    }
+    }*/
     
     // MARK: Exclusion Paths
     
@@ -79,22 +96,22 @@ struct TCTextView: Template {
     
     // MARK: Data
     
-    var article: TCTextViewDataArticle
+    var article: TComponentTextViewDataArticle
 }
 
 // MARK: - Data
 
-protocol TCTextViewDataProtocol {
+protocol TComponentTextViewData {
     var attributedString: NSAttributedString { get }
 }
 
 // MARK: Article
 
-struct TCTextViewDataArticle: TCTextViewDataProtocol {
+struct TComponentTextViewDataArticle: TComponentTextViewData {
     
-    var paragraphs: [TCTextViewDataParagraph]
+    var paragraphs: [TComponentTextViewDataParagraph]
     
-    init(paragraphs: [TCTextViewDataParagraph]) {
+    init(paragraphs: [TComponentTextViewDataParagraph]) {
         self.paragraphs = paragraphs
     }
     
@@ -107,12 +124,12 @@ struct TCTextViewDataArticle: TCTextViewDataProtocol {
 
 // MARK: Paragraph
 
-struct TCTextViewDataParagraph: TCTextViewDataProtocol {
+struct TComponentTextViewDataParagraph: TComponentTextViewData {
     
     var paragraphSpacing: CGFloat
-    var words: [TCTextViewDataWordProtocol]
+    var words: [TComponentTextViewDataWord]
     
-    init(paragraphSpacing: CGFloat, words: [TCTextViewDataWordProtocol]) {
+    init(paragraphSpacing: CGFloat, words: [TComponentTextViewDataWord]) {
         self.paragraphSpacing = paragraphSpacing
         self.words = words
     }
@@ -137,11 +154,11 @@ struct TCTextViewDataParagraph: TCTextViewDataProtocol {
 
 // MARK: Word
 
-protocol TCTextViewDataWordProtocol: TCTextViewDataProtocol {
+protocol TComponentTextViewDataWord: TComponentTextViewData {
     
 }
 
-struct TCTextViewDataWordText: TCTextViewDataWordProtocol {
+struct TComponentTextViewDataWordText: TComponentTextViewDataWord {
     
     let text: String
     let font: UIFont
@@ -152,19 +169,19 @@ struct TCTextViewDataWordText: TCTextViewDataWordProtocol {
         self.font = font
         self.color = color
     }
-
+    
     var attributedString: NSAttributedString {
         let attributedString = NSMutableAttributedString(string: text)
         let range = NSRange(location: 0, length: attributedString.length)
         
         attributedString.addAttribute(NSAttributedString.Key.font, value: font, range: range)
         attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
-
+        
         return attributedString
     }
 }
 
-struct TCTextViewDataWordIcon: TCTextViewDataWordProtocol {
+struct TComponentTextViewDataWordIcon: TComponentTextViewDataWord {
     
     let iconName: String
     let iconSize: CGSize

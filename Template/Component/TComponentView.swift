@@ -1,15 +1,17 @@
 //
-//  TCView.swift
+//  TComponentView.swift
 //  Template
 //
-//  Created by David Yu on 2018/7/12.
+//  Created by David Yu on 2018/7/13.
 //  Copyright © 2018年 David Yu. All rights reserved.
 //
 
 import UIKit
 
-struct TCView: Template {
-
+struct TComponentView: TComponent {
+    
+    typealias ComponentType = UIView
+    
     var x: CGFloat
     var y: CGFloat
     var width: CGFloat
@@ -24,16 +26,13 @@ struct TCView: Template {
         self.width = width
         self.height = height
         status = .normal
-
+        
         self.color = color
     }
-
-    mutating func calculate() {
-    }
     
-    mutating func setup(view: UIView) {
-        let myView = UIView(frame: frame)
-        myView.backgroundColor = color
-        view.addSubview(myView)
+    var component: UIView {
+        let view = UIView(frame: frame)
+        view.backgroundColor = color
+        return view
     }
 }

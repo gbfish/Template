@@ -45,6 +45,10 @@ class ViewController: UIViewController {
 //        print("templateLarge = \(templateLarge.size())")
 //        print(" - templateLarge = \(templateLarge.size())")
 
+        
+        
+//        let newLarge = NewTemplateLarge()
+//        newLarge.setupLayout()
 
     }
     
@@ -53,9 +57,31 @@ class ViewController: UIViewController {
         let width = UIScreen.main.bounds.width
         var templateLarge = TemplateLarge(x: 0, y: 50, width: width, title: "my title")
         
+        
+        print("templateLarge 1 = \(templateLarge.size())")
+        
+        templateLarge.calculate()
+        
+        print("templateLarge 2 = \(templateLarge.size())")
+
         templateLarge.setup(view: view)
+        
+        print("templateLarge 3 = \(templateLarge.size())")
+
     }
 
+    
+    func setupLayout() {
+        
+    }
+    
+    func setupView() {
+        
+    }
+    
+    func setupAction() {
+        
+    }
 
 }
 
