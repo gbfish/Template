@@ -9,7 +9,6 @@
 import UIKit
 
 struct TComponentButton: TComponent {
-    
     typealias ComponentType = UIButton
     
     var x: CGFloat
@@ -31,15 +30,14 @@ struct TComponentButton: TComponent {
     }
     
     var component: UIButton {
-        let button = TemplateComponentButtonUI(frame: frame, action: action)
-        button.backgroundColor = UIColor.brown
+        let button = TComponentButtonUI(frame: frame, action: action)
+//        button.backgroundColor = UIColor.brown
         button.addTarget(button, action: #selector(button.pressButton(_:)), for: .touchUpInside)
         return button
     }
 }
 
-class TemplateComponentButtonUI: UIButton {
-    
+class TComponentButtonUI: UIButton {
     init(frame: CGRect, action: @escaping () -> ()) {
         self.action = action
         super.init(frame: frame)

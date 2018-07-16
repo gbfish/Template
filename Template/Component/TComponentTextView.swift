@@ -9,7 +9,6 @@
 import UIKit
 
 struct TComponentTextView: TComponent {
-    
     typealias ComponentType = UITextView
     
     var x: CGFloat
@@ -38,6 +37,8 @@ struct TComponentTextView: TComponent {
         status = .normal
     }
     
+    // MARK: UITextView
+    
     var component: UITextView {
         let textView = UITextView(frame: frame)
         textView.attributedText = article.attributedString
@@ -53,34 +54,6 @@ struct TComponentTextView: TComponent {
         
         return textView
     }
-    
-    // MARK: UITextView
-    /*
-    private var textView: UITextView?
-    
-    mutating func myTextView() -> UITextView {
-        if let textView = textView {
-            return textView
-        } else {
-            textView = UITextView(frame: frame)
-            textView!.attributedText = article.attributedString
-            textView!.backgroundColor = UIColor.red
-            textView!.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            textView!.textContainer.lineFragmentPadding = 0
-            textView!.isEditable = false
-            textView!.isSelectable = false
-            textView!.isSelectable = false
-            textView!.textAlignment = NSTextAlignment.left
-            
-            textView!.textContainer.exclusionPaths = exclusionPaths()
-            
-            let newSize = textView!.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
-            height = newSize.height
-            textView!.frame = frame
-            
-            return textView!
-        }
-    }*/
     
     // MARK: Exclusion Paths
     
@@ -108,11 +81,15 @@ protocol TComponentTextViewData {
 // MARK: Article
 
 struct TComponentTextViewDataArticle: TComponentTextViewData {
-    
     var paragraphs: [TComponentTextViewDataParagraph]
     
     init(paragraphs: [TComponentTextViewDataParagraph]) {
         self.paragraphs = paragraphs
+        
+        if var lastParagraph = paragraphs.last {
+            lastParagraph.isLastParagraph = true
+            self.paragraphs[paragraphs.endIndex - 1] = lastParagraph
+        }
     }
     
     var attributedString: NSAttributedString {
@@ -125,28 +102,32 @@ struct TComponentTextViewDataArticle: TComponentTextViewData {
 // MARK: Paragraph
 
 struct TComponentTextViewDataParagraph: TComponentTextViewData {
-    
     var paragraphSpacing: CGFloat
+    var isLastParagraph: Bool
     var words: [TComponentTextViewDataWord]
     
     init(paragraphSpacing: CGFloat, words: [TComponentTextViewDataWord]) {
         self.paragraphSpacing = paragraphSpacing
         self.words = words
+        
+        self.isLastParagraph = false
     }
     
     var attributedString: NSAttributedString {
         let attributedString = NSMutableAttributedString()
         words.forEach { attributedString.append($0.attributedString) }
         
-        let returnAttributedString = NSAttributedString(string: "\n")
-        attributedString.insert(returnAttributedString, at: attributedString.length)
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 0
-        paragraphStyle.paragraphSpacing = paragraphSpacing
-        
-        let range = NSRange(location: 0, length: attributedString.length)
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: range)
+        if self.isLastParagraph == false {
+            let returnAttributedString = NSAttributedString(string: "\n")
+            attributedString.insert(returnAttributedString, at: attributedString.length)
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 0
+            paragraphStyle.paragraphSpacing = paragraphSpacing
+            
+            let range = NSRange(location: 0, length: attributedString.length)
+            attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: range)
+        }
         
         return attributedString
     }
@@ -155,11 +136,9 @@ struct TComponentTextViewDataParagraph: TComponentTextViewData {
 // MARK: Word
 
 protocol TComponentTextViewDataWord: TComponentTextViewData {
-    
 }
 
 struct TComponentTextViewDataWordText: TComponentTextViewDataWord {
-    
     let text: String
     let font: UIFont
     let color: UIColor
@@ -182,7 +161,6 @@ struct TComponentTextViewDataWordText: TComponentTextViewDataWord {
 }
 
 struct TComponentTextViewDataWordIcon: TComponentTextViewDataWord {
-    
     let iconName: String
     let iconSize: CGSize
     

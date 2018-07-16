@@ -6,7 +6,6 @@
 //  Copyright © 2018年 David Yu. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 enum Status {
@@ -109,7 +108,7 @@ extension Template {
 //    }
 }
 
-
+/*
 class NewTemplate {
     
     enum Status {
@@ -168,4 +167,4 @@ class NewTemplateLarge: NewTemplate {
         print("subclass setupLayout")
     }
     
-}
+}*/

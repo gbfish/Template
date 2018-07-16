@@ -83,7 +83,7 @@ class TemplateLarge: Template {
                 TComponentTextViewDataWordIcon(iconName: "sign-check-icon", iconSize: CGSize(width: 30, height: 30)),
                 TComponentTextViewDataWordText(text: "title first", font: UIFont.systemFont(ofSize: 20), color: UIColor.yellow),
                 TComponentTextViewDataWordText(text: "title second", font: UIFont.systemFont(ofSize: 15), color: UIColor.blue)]
-            let paragraph1 = TComponentTextViewDataParagraph(paragraphSpacing: 10, words: words1)
+            let paragraph1 = TComponentTextViewDataParagraph(paragraphSpacing: 20, words: words1)
             
             let words2 = [TComponentTextViewDataWordText(text: "detail first", font: UIFont.systemFont(ofSize: 25), color: UIColor.yellow), TComponentTextViewDataWordText(text: "detail second detail second detail second detail second detail second", font: UIFont.systemFont(ofSize: 10), color: UIColor.blue)]
             let paragraph2 = TComponentTextViewDataParagraph(paragraphSpacing: 0, words: words2)
@@ -198,6 +198,8 @@ class TemplateLarge: Template {
             self.items![2] = button
             
             _ = button.setup(view: view)
+            
+            
         }
         
         

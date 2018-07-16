@@ -9,14 +9,12 @@
 import UIKit
 
 protocol TComponent: Template {
-    
     associatedtype ComponentType: UIView
     var component: ComponentType { get }
     func setupComponent(for view: UIView) -> ComponentType
 }
 
 extension TComponent {
-    
     mutating func setup(view: UIView) {
         _ = setupComponent(for: view)
     }
@@ -27,3 +25,21 @@ extension TComponent {
         return newComponent
     }
 }
+
+enum TComponentData {
+    case view(view: TComponentView)
+    case button(button: TComponentButton)
+}
+
+
+//protocol TComponentData {
+//
+//}
+
+
+//struct Buffer<Element> {
+//
+////    subscript(at: Int) -> Element {
+////        return
+////    }
+//}

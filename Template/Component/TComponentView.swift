@@ -9,7 +9,6 @@
 import UIKit
 
 struct TComponentView: TComponent {
-    
     typealias ComponentType = UIView
     
     var x: CGFloat
