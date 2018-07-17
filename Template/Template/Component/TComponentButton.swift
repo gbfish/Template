@@ -9,14 +9,6 @@
 import UIKit
 
 struct TComponentButton: TComponent {
-    typealias ComponentType = UIButton
-    
-    var x: CGFloat
-    var y: CGFloat
-    var width: CGFloat
-    var height: CGFloat
-    var status: Status
-    
     var action: () -> ()
     
     init(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, action: @escaping () -> ()) {
@@ -24,22 +16,37 @@ struct TComponentButton: TComponent {
         self.y = y
         self.width = width
         self.height = height
-        status = .normal
+        status = .needCalculate
         
         self.action = action
     }
     
+    // MARK: - TComponent
+    
+    typealias ComponentType = UIButton
+    
     var component: UIButton {
-        let button = TComponentButtonUI(frame: frame, action: action)
-//        button.backgroundColor = UIColor.brown
+        let button = TComponentButtonUI(frame: currentFrame, action: action)
+        button.backgroundColor = UIColor.brown
         button.addTarget(button, action: #selector(button.pressButton(_:)), for: .touchUpInside)
         return button
     }
+    
+    // MARK: - TemplateSizeable
+    
+    var x: CGFloat
+    var y: CGFloat
+    var width: CGFloat
+    var height: CGFloat
+    var status: TemplateSizeableStatus
 }
+
+// MARK: - TComponentButtonUI
 
 class TComponentButtonUI: UIButton {
     init(frame: CGRect, action: @escaping () -> ()) {
         self.action = action
+
         super.init(frame: frame)
     }
     
@@ -48,7 +55,7 @@ class TComponentButtonUI: UIButton {
     }
     
     let action: () -> ()
-    
+
     @objc func pressButton(_ sender: UIButton) {
         action()
     }

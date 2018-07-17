@@ -1,5 +1,5 @@
 //
-//  NewTemplate.swift
+//  TemplateSizeable.swift
 //  Template
 //
 //  Created by David Yu on 2018/7/16.
@@ -13,10 +13,11 @@ protocol TemplateSizeable {
     var y: CGFloat { get set }
     var width: CGFloat { get set }
     var height: CGFloat { get set }
-    
     var status: TemplateSizeableStatus { get set }
-        
+    
     mutating func calculate()
+//    class func calculate()
+
 }
 
 enum TemplateSizeableStatus {
@@ -26,30 +27,28 @@ enum TemplateSizeableStatus {
 
 extension TemplateSizeable {
     mutating func calculate() {
-        status = .normal
     }
     
-    mutating func calculateIfNeed() {
+    mutating func calculateIfNeeded() {
         if status == .needCalculate {
             calculate()
+            status = .normal
         }
     }
     
-    var cuttentFrame: CGRect {
+    var currentFrame: CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
     }
+}
+
+extension TemplateSizeable where Self: AnyObject {
+    func calculate() {
+    }
     
-    
-    
-//    mutating func size() -> CGRect {
-//        if status == .needCalculate {
-//            calculate()
-//        }
-//        return CGRect(x: x, y: y, width: width, height: height)
-//    }
-//    
-//    mutating func change(width: CGFloat) {
-//        self.width = width
-//        status = .needCalculate
-//    }
+    mutating func calculateIfNeeded() {
+        if status == .needCalculate {
+            calculate()
+            status = .normal
+        }
+    }
 }

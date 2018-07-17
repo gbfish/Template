@@ -11,8 +11,9 @@
 		961051E820F944F900B59D87 /* TComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961051E720F944F900B59D87 /* TComponentView.swift */; };
 		961051EC20F9455700B59D87 /* TComponentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961051EB20F9455700B59D87 /* TComponentTextView.swift */; };
 		961051EE20FCDD2A00B59D87 /* TCombo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961051ED20FCDD2A00B59D87 /* TCombo.swift */; };
-		961051F020FD10AA00B59D87 /* NewTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961051EF20FD10AA00B59D87 /* NewTemplate.swift */; };
-		964016F020F3F51F005E242B /* TemplateLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964016EF20F3F51F005E242B /* TemplateLarge.swift */; };
+		961051F320FD23E700B59D87 /* TComboLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961051F220FD23E700B59D87 /* TComboLarge.swift */; };
+		961051F520FD28C900B59D87 /* TemplateSizeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961051F420FD28C900B59D87 /* TemplateSizeable.swift */; };
+		961051FA20FD372C00B59D87 /* TComboComplex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961051F920FD372C00B59D87 /* TComboComplex.swift */; };
 		966726EF20F8EB4300AD0F67 /* TComponentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966726EE20F8EB4300AD0F67 /* TComponentButton.swift */; };
 		9680B45C20F3C6B4001B67FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680B45B20F3C6B4001B67FB /* AppDelegate.swift */; };
 		9680B45E20F3C6B4001B67FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680B45D20F3C6B4001B67FB /* ViewController.swift */; };
@@ -20,7 +21,6 @@
 		9680B46320F3C6B6001B67FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9680B46220F3C6B6001B67FB /* Assets.xcassets */; };
 		9680B46620F3C6B6001B67FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9680B46420F3C6B6001B67FB /* LaunchScreen.storyboard */; };
 		9680B46E20F3C728001B67FB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9680B46D20F3C728001B67FB /* README.md */; };
-		9680B47020F3DF75001B67FB /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680B46F20F3DF75001B67FB /* Template.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +28,9 @@
 		961051E720F944F900B59D87 /* TComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TComponentView.swift; sourceTree = "<group>"; };
 		961051EB20F9455700B59D87 /* TComponentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TComponentTextView.swift; sourceTree = "<group>"; };
 		961051ED20FCDD2A00B59D87 /* TCombo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCombo.swift; sourceTree = "<group>"; };
-		961051EF20FD10AA00B59D87 /* NewTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTemplate.swift; sourceTree = "<group>"; };
-		964016EF20F3F51F005E242B /* TemplateLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLarge.swift; sourceTree = "<group>"; };
+		961051F220FD23E700B59D87 /* TComboLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TComboLarge.swift; sourceTree = "<group>"; };
+		961051F420FD28C900B59D87 /* TemplateSizeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateSizeable.swift; sourceTree = "<group>"; };
+		961051F920FD372C00B59D87 /* TComboComplex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TComboComplex.swift; sourceTree = "<group>"; };
 		966726EE20F8EB4300AD0F67 /* TComponentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TComponentButton.swift; sourceTree = "<group>"; };
 		9680B45820F3C6B4001B67FB /* Template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Template.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9680B45B20F3C6B4001B67FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,7 +40,6 @@
 		9680B46520F3C6B6001B67FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9680B46720F3C6B6001B67FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9680B46D20F3C728001B67FB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		9680B46F20F3DF75001B67FB /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +57,28 @@
 			isa = PBXGroup;
 			children = (
 				961051ED20FCDD2A00B59D87 /* TCombo.swift */,
-				964016EF20F3F51F005E242B /* TemplateLarge.swift */,
 			);
 			path = Combo;
+			sourceTree = "<group>";
+		};
+		961051F120FD1F5600B59D87 /* Template */ = {
+			isa = PBXGroup;
+			children = (
+				961051F420FD28C900B59D87 /* TemplateSizeable.swift */,
+				961051F820FD36B700B59D87 /* Custom */,
+				961051DC20F9404300B59D87 /* Combo */,
+				96A1022220F556F30053B4E0 /* Component */,
+			);
+			path = Template;
+			sourceTree = "<group>";
+		};
+		961051F820FD36B700B59D87 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				961051F220FD23E700B59D87 /* TComboLarge.swift */,
+				961051F920FD372C00B59D87 /* TComboComplex.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		9680B44F20F3C6B4001B67FB = {
@@ -84,10 +103,7 @@
 			children = (
 				9680B45B20F3C6B4001B67FB /* AppDelegate.swift */,
 				9680B45D20F3C6B4001B67FB /* ViewController.swift */,
-				9680B46F20F3DF75001B67FB /* Template.swift */,
-				961051EF20FD10AA00B59D87 /* NewTemplate.swift */,
-				961051DC20F9404300B59D87 /* Combo */,
-				96A1022220F556F30053B4E0 /* Component */,
+				961051F120FD1F5600B59D87 /* Template */,
 				9680B45F20F3C6B4001B67FB /* Main.storyboard */,
 				9680B46220F3C6B6001B67FB /* Assets.xcassets */,
 				9680B46420F3C6B6001B67FB /* LaunchScreen.storyboard */,
@@ -179,13 +195,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9680B47020F3DF75001B67FB /* Template.swift in Sources */,
+				961051FA20FD372C00B59D87 /* TComboComplex.swift in Sources */,
+				961051F520FD28C900B59D87 /* TemplateSizeable.swift in Sources */,
 				961051EE20FCDD2A00B59D87 /* TCombo.swift in Sources */,
-				961051F020FD10AA00B59D87 /* NewTemplate.swift in Sources */,
-				964016F020F3F51F005E242B /* TemplateLarge.swift in Sources */,
 				961051DB20F9207200B59D87 /* TComponent.swift in Sources */,
 				9680B45E20F3C6B4001B67FB /* ViewController.swift in Sources */,
 				966726EF20F8EB4300AD0F67 /* TComponentButton.swift in Sources */,
+				961051F320FD23E700B59D87 /* TComboLarge.swift in Sources */,
 				961051EC20F9455700B59D87 /* TComponentTextView.swift in Sources */,
 				961051E820F944F900B59D87 /* TComponentView.swift in Sources */,
 				9680B45C20F3C6B4001B67FB /* AppDelegate.swift in Sources */,

@@ -9,13 +9,8 @@
 import UIKit
 
 struct TComponentTextView: TComponent {
-    typealias ComponentType = UITextView
-    
-    var x: CGFloat
-    var y: CGFloat
-    var width: CGFloat
-    var height: CGFloat
-    var status: Status
+    var article: TComponentTextViewDataArticle
+    let exclusionRectArray: [CGRect]?
     
     init(x: CGFloat, y: CGFloat, width: CGFloat, article: TComponentTextViewDataArticle, exclusionRectArray: [CGRect]?) {
         self.x = x
@@ -28,19 +23,12 @@ struct TComponentTextView: TComponent {
         self.exclusionRectArray = exclusionRectArray
     }
     
-    mutating func calculate() {
-        let textView = component
-        
-        let newSize = textView.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
-        height = newSize.height
-        
-        status = .normal
-    }
+    // MARK: - TComponent
     
-    // MARK: UITextView
+    typealias ComponentType = UITextView
     
     var component: UITextView {
-        let textView = UITextView(frame: frame)
+        let textView = UITextView(frame: currentFrame)
         textView.attributedText = article.attributedString
         textView.backgroundColor = UIColor.red
         textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -50,35 +38,37 @@ struct TComponentTextView: TComponent {
         textView.isSelectable = false
         textView.textAlignment = NSTextAlignment.left
         
-        textView.textContainer.exclusionPaths = exclusionPaths()
+        var exclusionPaths = [UIBezierPath]()
+        exclusionRectArray?.forEach { exclusionPaths.append(UIBezierPath(rect: $0)) }
+        
+        textView.textContainer.exclusionPaths = exclusionPaths
         
         return textView
     }
     
-    // MARK: Exclusion Paths
+    // MARK: - TemplateSizeable
     
-    let exclusionRectArray: [CGRect]?
+    var x: CGFloat
+    var y: CGFloat
+    var width: CGFloat
+    var height: CGFloat
+    var status: TemplateSizeableStatus
     
-    private func exclusionPaths() -> [UIBezierPath] {
-        var exclusionPaths = [UIBezierPath]()
-        exclusionRectArray?.forEach({
-            exclusionPaths.append(UIBezierPath(rect: $0))
-        })
-        return exclusionPaths
+    mutating func calculate() {
+        let textView = component
+        
+        let newSize = textView.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        height = newSize.height
     }
-    
-    // MARK: Data
-    
-    var article: TComponentTextViewDataArticle
 }
 
-// MARK: - Data
+// MARK: - TComponentTextViewData
 
 protocol TComponentTextViewData {
     var attributedString: NSAttributedString { get }
 }
 
-// MARK: Article
+// MARK: - Article
 
 struct TComponentTextViewDataArticle: TComponentTextViewData {
     var paragraphs: [TComponentTextViewDataParagraph]
@@ -99,7 +89,7 @@ struct TComponentTextViewDataArticle: TComponentTextViewData {
     }
 }
 
-// MARK: Paragraph
+// MARK: - Paragraph
 
 struct TComponentTextViewDataParagraph: TComponentTextViewData {
     var paragraphSpacing: CGFloat
@@ -133,7 +123,7 @@ struct TComponentTextViewDataParagraph: TComponentTextViewData {
     }
 }
 
-// MARK: Word
+// MARK: - Word
 
 protocol TComponentTextViewDataWord: TComponentTextViewData {
 }
